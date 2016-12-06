@@ -1,6 +1,6 @@
-# TeamCity Roundhouse Plugin
+# TeamCity Config Transformations Plugin
 
-The TeamCity Roundhouse plugin provides support of applying .net  [config transformations](https://msdn.microsoft.com/en-us/library/dd465326(v=vs.110).aspx)
+TeamCity Config Transformations plugin provides support of applying .net  [config transformations](https://msdn.microsoft.com/en-us/library/dd465326(v=vs.110).aspx)
 
 # Compatibility
 
