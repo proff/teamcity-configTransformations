@@ -1,0 +1,876 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>JetBrains.TeamCity.ServiceMessages</name>
+    </assembly>
+    <members>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Annotations.LocalizationRequiredAttribute">
+            <summary>
+            Indicates that marked element should be localized or not.
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Annotations.LocalizationRequiredAttribute.#ctor(System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JetBrains.TeamCity.ServiceMessages.Annotations.LocalizationRequiredAttribute"/> class.
+            </summary>
+            <param name="required"><c>true</c> if a element should be localized; otherwise, <c>false</c>.</param>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Annotations.LocalizationRequiredAttribute.Equals(System.Object)">
+            <summary>
+            Returns whether the value of the given object is equal to the current <see cref="T:JetBrains.TeamCity.ServiceMessages.Annotations.LocalizationRequiredAttribute"/>.
+            </summary>
+            <param name="obj">The object to test the value equality of. </param>
+            <returns>
+            <c>true</c> if the value of the given object is equal to that of the current; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Annotations.LocalizationRequiredAttribute.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>A hash code for the current <see cref="T:JetBrains.TeamCity.ServiceMessages.Annotations.LocalizationRequiredAttribute"/>.</returns>
+        </member>
+        <member name="P:JetBrains.TeamCity.ServiceMessages.Annotations.LocalizationRequiredAttribute.Required">
+            <summary>
+            Gets a value indicating whether a element should be localized.
+            <value><c>true</c> if a element should be localized; otherwise, <c>false</c>.</value>
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Annotations.StringFormatMethodAttribute">
+            <summary>
+            Indicates that marked method builds string by format pattern and (optional) arguments. 
+            Parameter, which contains format string, should be given in constructor.
+            The format string should be in <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])"/> -like form
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Annotations.StringFormatMethodAttribute.#ctor(System.String)">
+            <summary>
+            Initializes new instance of StringFormatMethodAttribute
+            </summary>
+            <param name="formatParameterName">Specifies which parameter of an annotated method should be treated as format-string</param>
+        </member>
+        <member name="P:JetBrains.TeamCity.ServiceMessages.Annotations.StringFormatMethodAttribute.FormatParameterName">
+            <summary>
+            Gets format parameter name
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Annotations.InvokerParameterNameAttribute">
+            <summary>
+            Indicates that the function argument should be string literal and match one  of the parameters of the caller function.
+            For example, <see cref="T:System.ArgumentNullException"/> has such parameter.
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Annotations.AssertionMethodAttribute">
+            <summary>
+            Indicates that the marked method is assertion method, i.e. it halts control flow if one of the conditions is satisfied. 
+            To set the condition, mark one of the parameters with <see cref="T:JetBrains.TeamCity.ServiceMessages.Annotations.AssertionConditionAttribute"/> attribute
+            </summary>
+            <seealso cref="T:JetBrains.TeamCity.ServiceMessages.Annotations.AssertionConditionAttribute"/>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Annotations.AssertionConditionAttribute">
+            <summary>
+            Indicates the condition parameter of the assertion method. 
+            The method itself should be marked by <see cref="T:JetBrains.TeamCity.ServiceMessages.Annotations.AssertionMethodAttribute"/> attribute.
+            The mandatory argument of the attribute is the assertion type.
+            </summary>
+            <seealso cref="T:JetBrains.TeamCity.ServiceMessages.Annotations.AssertionConditionType"/>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Annotations.AssertionConditionAttribute.#ctor(JetBrains.TeamCity.ServiceMessages.Annotations.AssertionConditionType)">
+            <summary>
+            Initializes new instance of AssertionConditionAttribute
+            </summary>
+            <param name="conditionType">Specifies condition type</param>
+        </member>
+        <member name="P:JetBrains.TeamCity.ServiceMessages.Annotations.AssertionConditionAttribute.ConditionType">
+            <summary>
+            Gets condition type
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Annotations.AssertionConditionType">
+            <summary>
+            Specifies assertion type. If the assertion method argument satisifes the condition, then the execution continues. 
+            Otherwise, execution is assumed to be halted
+            </summary>
+        </member>
+        <member name="F:JetBrains.TeamCity.ServiceMessages.Annotations.AssertionConditionType.IS_TRUE">
+            <summary>
+            Indicates that the marked parameter should be evaluated to true
+            </summary>
+        </member>
+        <member name="F:JetBrains.TeamCity.ServiceMessages.Annotations.AssertionConditionType.IS_FALSE">
+            <summary>
+            Indicates that the marked parameter should be evaluated to false
+            </summary>
+        </member>
+        <member name="F:JetBrains.TeamCity.ServiceMessages.Annotations.AssertionConditionType.IS_NULL">
+            <summary>
+            Indicates that the marked parameter should be evaluated to null value
+            </summary>
+        </member>
+        <member name="F:JetBrains.TeamCity.ServiceMessages.Annotations.AssertionConditionType.IS_NOT_NULL">
+            <summary>
+            Indicates that the marked parameter should be evaluated to not null value
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Annotations.TerminatesProgramAttribute">
+            <summary>
+            Indicates that the marked method unconditionally terminates control flow execution.
+            For example, it could unconditionally throw exception
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Annotations.CanBeNullAttribute">
+            <summary>
+            Indicates that the value of marked element could be <c>null</c> sometimes, so the check for <c>null</c> is necessary before its usage
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Annotations.NotNullAttribute">
+            <summary>
+            Indicates that the value of marked element could never be <c>null</c>
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Annotations.CannotApplyEqualityOperatorAttribute">
+            <summary>
+            Indicates that the value of marked type (or its derivatives) cannot be compared using '==' or '!=' operators.
+            There is only exception to compare with <c>null</c>, it is permitted
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Annotations.BaseTypeRequiredAttribute">
+            <summary>
+            When applied to target attribute, specifies a requirement for any type which is marked with 
+            target attribute to implement or inherit specific type or types
+            </summary>
+            <example>
+            <code>
+            [BaseTypeRequired(typeof(IComponent)] // Specify requirement
+            internal class ComponentAttribute : Attribute 
+            {}
+            
+            [Component] // ComponentAttribute requires implementing IComponent interface
+            internal class MyComponent : IComponent
+            {}
+            </code>
+            </example>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Annotations.BaseTypeRequiredAttribute.#ctor(System.Type)">
+            <summary>
+            Initializes new instance of BaseTypeRequiredAttribute
+            </summary>
+            <param name="baseType">Specifies which types are required</param>
+        </member>
+        <member name="P:JetBrains.TeamCity.ServiceMessages.Annotations.BaseTypeRequiredAttribute.BaseTypes">
+            <summary>
+            Gets enumerations of specified base types
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Annotations.UsedImplicitlyAttribute">
+            <summary>
+            Indicates that the marked symbol is used implicitly (e.g. via reflection, in external library),
+            so this symbol will not be marked as unused (as well as by other usage inspections)
+            </summary>
+        </member>
+        <member name="P:JetBrains.TeamCity.ServiceMessages.Annotations.UsedImplicitlyAttribute.TargetFlags">
+            <summary>
+            Gets value indicating what is meant to be used
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Annotations.MeansImplicitUseAttribute">
+            <summary>
+            Should be used on attributes and causes ReSharper to not mark symbols marked with such attributes as unused (as well as by other usage inspections)
+            </summary>
+        </member>
+        <member name="P:JetBrains.TeamCity.ServiceMessages.Annotations.MeansImplicitUseAttribute.TargetFlags">
+            <summary>
+            Gets value indicating what is meant to be used
+            </summary>
+        </member>
+        <member name="F:JetBrains.TeamCity.ServiceMessages.Annotations.ImplicitUseKindFlags.Access">
+            <summary>
+            Only entity marked with attribute considered used
+            </summary>
+        </member>
+        <member name="F:JetBrains.TeamCity.ServiceMessages.Annotations.ImplicitUseKindFlags.Assign">
+            <summary>
+            Indicates implicit assignment to a member
+            </summary>
+        </member>
+        <member name="F:JetBrains.TeamCity.ServiceMessages.Annotations.ImplicitUseKindFlags.InstantiatedWithFixedConstructorSignature">
+            <summary>
+            Indicates implicit instantiation of a type with fixed constructor signature.
+            That means any unused constructor parameters won't be reported as such.
+            </summary>
+        </member>
+        <member name="F:JetBrains.TeamCity.ServiceMessages.Annotations.ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature">
+            <summary>
+            Indicates implicit instantiation of a type
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Annotations.ImplicitUseTargetFlags">
+            <summary>
+            Specify what is considered used implicitly when marked with <see cref="T:JetBrains.TeamCity.ServiceMessages.Annotations.MeansImplicitUseAttribute"/> or <see cref="T:JetBrains.TeamCity.ServiceMessages.Annotations.UsedImplicitlyAttribute"/>
+            </summary>
+        </member>
+        <member name="F:JetBrains.TeamCity.ServiceMessages.Annotations.ImplicitUseTargetFlags.Members">
+            <summary>
+            Members of entity marked with attribute are considered used
+            </summary>
+        </member>
+        <member name="F:JetBrains.TeamCity.ServiceMessages.Annotations.ImplicitUseTargetFlags.WithMembers">
+            <summary>
+            Entity marked with attribute and all its members considered used
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Annotations.internalAPIAttribute">
+            <summary>
+            This attribute is intended to mark internally available API which should not be removed and so is treated as used.
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Annotations.InstantHandleAttribute">
+            <summary>
+            Tells code analysis engine if the parameter is completely handled when the invoked method is on stack. 
+            If the parameter is delegate, indicates that delegate is executed while the method is executed.
+            If the parameter is enumerable, indicates that it is enumerated while the method is executed.
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Annotations.PureAttribute">
+            <summary>
+            Indicates that method doesn't contain observable side effects.
+            The same as <see cref="!:System.Diagnostics.Contracts.PureAttribute"/>
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.IServiceMessage">
+            <summary>
+            Object representation of TeamCity service message
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.IServiceMessage.GetValue(System.String)">
+            <summary>
+            Return a value for keys or <code>null</code>
+            </summary>
+            <param name="key">Key to check for value</param>
+            <returns>value of available or <code>null</code></returns>
+        </member>
+        <member name="P:JetBrains.TeamCity.ServiceMessages.IServiceMessage.Name">
+            <summary>
+            Service message name, i.e. messageName in ##teamcity[messageName 'ddd']. 
+            </summary>
+        </member>
+        <member name="P:JetBrains.TeamCity.ServiceMessages.IServiceMessage.DefaultValue">
+            <summary>
+            For one-value service messages returns value, i.e. 'aaa' for ##teamcity[message 'aaa']
+            or <code>null</code> otherwise, i.e. ##teamcity[message aa='aaa']
+            </summary>
+        </member>
+        <member name="P:JetBrains.TeamCity.ServiceMessages.IServiceMessage.Keys">
+            <summary>
+            Emptry for one-value service messages, i.e. ##teamcity[message 'aaa'], returns all keys otherwise
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Read.IServiceMessageParser">
+            <summary>
+            Provides service messages parsing from stream
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Read.IServiceMessageParser.ParseServiceMessages(System.String)">
+            <summary>
+            Lazy parses service messages from string
+            </summary>
+            <param name="text">text to parse</param>
+            <returns>enumerable of service messages</returns>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Read.IServiceMessageParser.ParseServiceMessages(System.IO.TextReader)">
+            <summary>
+            Reads stream parsing service messages from it.
+            </summary>
+            <param name="reader">stream to parse. Stream will not be closed</param>
+            <returns>Iterator of service messages</returns>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Read.ServiceMessageParser">
+            <summary>
+            Provides service messages parsing from stream
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Read.ServiceMessageParser.ParseServiceMessages(System.String)">
+            <summary>
+            Lazy parses service messages from string
+            </summary>
+            <param name="text">text to parse</param>
+            <returns>enumerable of service messages</returns>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Read.ServiceMessageParser.ParseServiceMessages(System.IO.TextReader)">
+            <summary>
+            Reads stream parsing service messages from it.
+            </summary>
+            <param name="reader">stream to parse. Stream will not be closed</param>
+            <returns>Iterator of service messages</returns>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.ServiceMessageReplacements.Encode(System.String)">
+            <summary>
+            Performs TeamCity-format escaping of a string.
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.ServiceMessageReplacements.Decode(System.String)">
+            <summary>
+            Performs TeamCity-format escaping of a string.
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.IServiceMessageFormatter">
+            <summary>
+            Provides service messages serialization for most cases
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.IServiceMessageFormatter.FormatMessage(System.String,System.String)">
+            <summary>
+            Serializes single value service message
+            </summary>
+            <param name="messageName">message name</param>
+            <param name="singleValue">value</param>
+            <returns>service message string</returns>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.IServiceMessageFormatter.FormatMessage(System.String,System.Object)">
+            <summary>
+            Serializes single value service message
+            </summary>
+            <param name="messageName">message name</param>
+            <param name="anonymousProperties">anonymous object containing all service message parameters</param>
+            <returns>service message string</returns>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.IServiceMessageFormatter.FormatMessage(System.String,JetBrains.TeamCity.ServiceMessages.Write.ServiceMessageProperty[])">
+            <summary>
+            Serializes single value service message
+            </summary>
+            <param name="messageName">message name</param>
+            <param name="properties">params array of service message properties</param>
+            <returns>service message string</returns>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.IServiceMessageFormatter.FormatMessage(System.String,System.Collections.Generic.IEnumerable{JetBrains.TeamCity.ServiceMessages.Write.ServiceMessageProperty})">
+            <summary>
+            Serializes single value service message
+            </summary>
+            <param name="messageName">message name</param>
+            <param name="properties">params of service message properties</param>
+            <returns>service message string</returns>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.IServiceMessageFormatter.FormatMessage(JetBrains.TeamCity.ServiceMessages.IServiceMessage)">
+            <summary>
+            Serializes service message
+            </summary>
+            <param name="serviceMessage"></param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.IServiceMessageFormatter.FormatMessage(System.String,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+            <summary>
+            Serializes service message from IDictionary
+            </summary>
+            <param name="name">service message name</param>
+            <param name="arguments">arguments</param>
+            <returns></returns>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.ServiceMessage">
+            <summary>
+            Helper class to create complex service message. Use object initilizer to simplify code, i.e.
+            <code>
+              new ServiceMessage("buildProblem") { { "identity", identity}, {"description", message}}
+            </code>
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.ServiceMessage.#ctor(JetBrains.TeamCity.ServiceMessages.IServiceMessage)">
+            <summary>
+            Copy constructor
+            </summary>
+            <param name="message">service message to copy from</param>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.ServiceMessage.#ctor(System.String)">
+            <summary>
+            Simple constructor
+            </summary>
+            <param name="name">service message name</param>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.ServiceMessageFormatter">
+            <summary>
+            Provides service messages serialization for most cases
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.ServiceMessageFormatter.FormatMessage(System.String,System.String)">
+            <summary>
+            Serializes single value service message
+            </summary>
+            <param name="messageName">message name</param>
+            <param name="singleValue">value</param>
+            <returns>service message string</returns>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.ServiceMessageFormatter.FormatMessage(System.String,System.Object)">
+            <summary>
+            Serializes single value service message
+            </summary>
+            <param name="messageName">message name</param>
+            <param name="anonymousProperties">anonymous object containing all service message parameters</param>
+            <returns>service message string</returns>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.ServiceMessageFormatter.FormatMessage(System.String,JetBrains.TeamCity.ServiceMessages.Write.ServiceMessageProperty[])">
+            <summary>
+            Serializes single value service message
+            </summary>
+            <param name="messageName">message name</param>
+            <param name="properties">params array of service message properties</param>
+            <returns>service message string</returns>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.ServiceMessageFormatter.FormatMessage(JetBrains.TeamCity.ServiceMessages.IServiceMessage)">
+            <summary>
+            Serializes service message
+            </summary>
+            <param name="serviceMessage">parser service message</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.ServiceMessageFormatter.FormatMessage(System.String,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}})">
+            <summary>
+            Serializes service message from IDictionary
+            </summary>
+            <param name="name">service message name</param>
+            <param name="arguments">arguments</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.ServiceMessageFormatter.FormatMessage(System.String,System.Collections.Generic.IEnumerable{JetBrains.TeamCity.ServiceMessages.Write.ServiceMessageProperty})">
+            <summary>
+            Serializes single value service message
+            </summary>
+            <param name="messageName">message name</param>
+            <param name="properties">params of service message properties</param>
+            <returns>service message string</returns>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.ServiceMessageProperty">
+            <summary>
+            Object to represent service message attributes
+            </summary>
+        </member>
+        <member name="F:JetBrains.TeamCity.ServiceMessages.Write.ServiceMessageProperty.Key">
+            <summary>
+            Key
+            </summary>
+        </member>
+        <member name="F:JetBrains.TeamCity.ServiceMessages.Write.ServiceMessageProperty.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.ServiceMessageProperty.#ctor(System.String,System.String)">
+            <summary>
+            Constructor of service message attribute
+            </summary>
+            <param name="key">service message key, must not contain escapable symbols, not null</param>
+            <param name="value">value, notnull</param>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.IFlowIdGenerator">
+            <summary>
+            Helper class to generate FlowIds
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.IFlowIdGenerator.NewFlowId">
+            <summary>
+            Generates new unique FlowId
+            </summary>
+            <returns>next generated flow id</returns>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.Impl.DefaultFlowIdGenerator">
+            <summary>
+            Helper class to generate FlowIds
+            </summary>  
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.Impl.DefaultFlowIdGenerator.NewFlowId">
+            <summary>
+            Generates new unique FlowId
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.Impl.PatchedServiceMessage">
+            <summary>
+            Helper implementation of IServiceMessage
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.Impl.ServiceMessagesWriter">
+            <summary>
+            Simple implementation of ServiceMessage 
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.IServiceMessageProcessor">
+            <summary>
+            Abstract service message acceptor
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.IServiceMessageProcessor.AddServiceMessage(JetBrains.TeamCity.ServiceMessages.IServiceMessage)">
+            <summary>
+            Accepts new service message. Default implementation may simply prtint service message to console
+            </summary>
+            <param name="serviceMessage">service message to process</param>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.Impl.FlowServiceMessageWriter">
+            <summary>
+            Servivce message acceptor implementation with support of IServiceMessageUpdater chains
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.IFlowServiceMessageProcessor">
+            <summary>
+            FlowId aware implementation of ServiceMessagesProcessor
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.IFlowServiceMessageProcessor.ForNewFlow">
+            <summary>
+            Creates new ServiceMessage updater that uses specified FlowId
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:JetBrains.TeamCity.ServiceMessages.Write.Special.IFlowServiceMessageProcessor.FlowId">
+            <summary>
+            Current flow Id
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.Impl.FlowServiceMessageWriter.#ctor(JetBrains.TeamCity.ServiceMessages.Write.Special.IServiceMessageProcessor,JetBrains.TeamCity.ServiceMessages.Write.Special.IFlowIdGenerator,System.Collections.Generic.IEnumerable{JetBrains.TeamCity.ServiceMessages.Write.Special.IServiceMessageUpdater})">
+            <summary>
+            Creates generic processor that calls messages updaters and sends output to provided deledate.
+            </summary>
+            <param name="processor">writer of service messages objects</param>
+            <param name="generator">flow id generator that is called to create next flowId</param>
+            <param name="updaters">service message updaters, i.e. timestamp updater</param>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.Impl.FlowServiceMessageWriter.ForNewFlow">
+            <summary>
+            Creates new ServiceMessage updater that uses specified FlowId
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityWriter">
+            <summary>
+            Specialized service messages writer facade. Contains all methods for generating different service messages.
+            
+            Do not forget to dispose this interface after you finished using it. 
+            
+            To get the instance of the interface, call <code>new JetBrains.TeamCity.ServiceMessages.Write.Special.TeamCityServiceMessages().CreateWriter</code>
+            </summary>
+            <remarks>
+            Implementation is not thread-safe. Create an instance for each thread instead.
+            </remarks>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityBlockWriter`1">
+            <summary>
+            Generates pair of service messages to open/close block, for example:
+            <pre>##teamcity[blockOpened name='&lt;blockName>']</pre>
+            and 
+            <pre>##teamcity[blockClosed name='&lt;blockName>']</pre>
+            http://confluence.jetbrains.net/display/TCD7/Build+Script+Interaction+with+TeamCity#BuildScriptInteractionwithTeamCity-BlocksofServiceMessages
+            </summary>
+            <remarks>
+            Implementation is not thread-safe. Create an instance for each thread instead.
+            </remarks>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityBlockWriter`1.OpenBlock(System.String)">
+            <summary>
+            Generates open block message. To close the block, call Dispose to the given handle
+            </summary>
+            <param name="blockName">block name to report</param>
+            <returns></returns>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityFlowWriter`1">
+            <summary>
+            Starts another flowId reporting starting. This call would emmit
+            <pre>##teamcity[flowStarted flowId='%lt;new flow id>' parent='current flow id']</pre>
+            and 
+            <pre>##teamcity[flowFinished flowId='%lt;new flow id>']</pre>
+            on writer dispose
+            </summary>
+            <remarks>
+            Implementation is not thread-safe. Create an instance for each thread instead.
+            </remarks>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityFlowWriter`1.OpenFlow">
+            <summary>
+            Generates start flow message and returns disposable object to close flow
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityMessageWriter">
+            <summary>
+            Add a build log entry message
+            <pre>
+            ##teamcity[message text='&lt;message text>' errorDetails='&lt;error details>' status='&lt;status value>']
+            </pre>
+            http://confluence.jetbrains.net/display/TCD7/Build+Script+Interaction+with+TeamCity#BuildScriptInteractionwithTeamCity-ReportingMessagesForBuildLog
+            </summary>
+            <remarks>
+            Implementation is not thread-safe. Create an instance for each thread instead.
+            </remarks>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityMessageWriter.WriteMessage(System.String)">
+            <summary>
+            Writes normal message
+            </summary>
+            <param name="text">text</param>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityMessageWriter.WriteWarning(System.String)">
+            <summary>
+            Writes warning message
+            </summary>
+            <param name="text">text</param>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityMessageWriter.WriteError(System.String,System.String)">
+            <summary>
+            Writes error message with details
+            </summary>
+            <param name="text">text</param>
+            <param name="errorDetails">error details</param>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityTestsWriter">
+            <summary>
+            This interface provides writers for test messages. 
+            All, but test ignore messages are required to be reported from 
+            <pre>##teamcity[testStarted name='testname']</pre> and
+            <pre>##teamcity[testFinished name='testname' duration='&lt;test_duration_in_milliseconds>']</pre>
+            messages.
+            
+            All tests reportings are done form this method.  
+            </summary>
+            <remarks>
+            Implementation is not thread-safe. Create an instance for each thread instead.
+            </remarks>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityTestSuiteWriter">
+            <summary>
+            TeamCity tests loggin in done in test suites. 
+            To be able to logs tests you first need to open suite
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityTestSuiteWriter.OpenTestSuite(System.String)">
+            <summary>
+            Opens tests suite with give name
+            <pre>##teamcity[testSuiteStarted name='suite.name']</pre>
+            To close suite, call Dispose method of a returned logger.
+            </summary>
+            <param name="suiteName">suite name</param>
+            <returns>test logger.</returns>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityTestsWriter.OpenTest(System.String)">
+            <summary>
+            To start reporting a test, call OpenTest method. To stop reporing test call Dispose on the given object
+            </summary>
+            <param name="testName">test name to be reported</param>
+            <returns>test output/status reporting handle</returns>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityCompilationBlockWriter`1">
+            <summary>
+            Introduces compilation block.
+            <pre>##teamcity[compilationStarted compiler='&lt;compiler name>']</pre>
+            and
+            <pre>##teamcity[compilationFinished compiler='&lt;compiler name>']</pre>
+            http://confluence.jetbrains.net/display/TCD7/Build+Script+Interaction+with+TeamCity#BuildScriptInteractionwithTeamCity-ReportingCompilationMessages
+            </summary>
+            <remarks>
+            Implementation is not thread-safe. Create an instance for each thread instead.
+            </remarks>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityCompilationBlockWriter`1.OpenCompilationBlock(System.String)">
+            <summary>
+            Generates open compilation block. To close block call Dispose to the given handle
+            </summary>
+            <param name="compilerName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityArtifactsWriter">
+            <summary>
+            Service messages for dynamically publish artifacts.
+            http://confluence.jetbrains.net/display/TCD7/Build+Script+Interaction+with+TeamCity#BuildScriptInteractionwithTeamCity-PublishingArtifactswhiletheBuildisStillinProgress
+            </summary>
+            <remarks>
+            Implementation is not thread-safe. Create an instance for each thread instead.
+            </remarks>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityArtifactsWriter.PublishArtifact(System.String)">
+            <summary>
+            attaches new artifact publishing rules as described in 
+            http://confluence.jetbrains.net/display/TCD7/Build+Artifact
+            </summary>
+            <param name="rules"></param>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityBuildStatusWriter">
+            <summary>
+            Interface for writing build-related messages
+            http://confluence.jetbrains.net/display/TCD7/Build+Script+Interaction+with+TeamCity#BuildScriptInteractionwithTeamCity-ReportingBuildNumber
+            </summary>
+            <remarks>
+            Implementation is not thread-safe. Create an instance for each thread instead.
+            </remarks>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityBuildStatusWriter.WriteBuildNumber(System.String)">
+            <summary>
+            Generates service message to update build number.
+            </summary>
+            <param name="buildNumber"></param>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityBuildStatusWriter.WriteBuildProblem(System.String,System.String)">
+            <summary>
+            Generates build problem service message
+            </summary>
+            <param name="identity">problem unique identity, no more than 60 chars</param>
+            <param name="description">problem message</param>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityBuildStatusWriter.WriteBuildParameter(System.String,System.String)">
+            <summary>
+            Generates service message to update build parameter
+            
+            http://confluence.jetbrains.net/display/TCD7/Configuring+Build+Parameters
+            </summary>
+            <param name="parameterName">parameter name, could start with env. for environment, system. for system property, otherwise it would be config parameter</param>
+            <param name="parameterValue">value</param>
+            
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityBuildStatusWriter.WriteBuildStatistics(System.String,System.String)">
+            <summary>
+            Generates service message to report build statistics values
+            
+            http://confluence.jetbrains.net/display/TCD7/Customizing+Statistics+Charts#CustomizingStatisticsCharts-customCharts
+            </summary>
+            <param name="statisticsKey">statistics report key</param>
+            <param name="statisticsValue">statistics report values</param>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityWriter.WriteRawMessage(JetBrains.TeamCity.ServiceMessages.IServiceMessage)">
+            <summary>
+             Allows to send bare service message
+            </summary>
+            <param name="message">message to send</param>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.Impl.Writer.ISubWriter">
+            <summary>
+            Represents information about currently openned child blocks or tests or test suites.
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.Impl.Writer.ISubWriter.AssertNoChildOpened">
+            <summary>
+            This method performs check if no child blocks are opennd.
+            It is used to check if it is allowed to use current I*Writer
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.Impl.Updater.FlowMessageUpdater">
+            <summary>
+            Service message updater that adds FlowId to service message according to
+            http://confluence.jetbrains.net/display/TCD7/Build+Script+Interaction+with+TeamCity
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.IServiceMessageUpdater">
+            <summary>
+            Base interface for service message updaters
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.IServiceMessageUpdater.UpdateServiceMessage(JetBrains.TeamCity.ServiceMessages.IServiceMessage)">
+            <summary>
+            Thus method is called to update service message instance.
+            </summary>
+            <param name="message">service message</param>
+            <returns>updated service message</returns>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.Impl.Updater.FlowMessageUpdater.#ctor(System.String)">
+            <summary>
+            Custructs updater
+            </summary>
+            <param name="flowId">flowId set to all messages</param>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.Impl.Updater.FlowMessageUpdater.#ctor(JetBrains.TeamCity.ServiceMessages.Write.Special.IFlowIdGenerator)">
+            <summary>
+            Creates flow id from given generator instance
+            </summary>
+            <param name="flowId"></param>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.Impl.Updater.TimestampUpdater">
+            <summary>
+            Service message updater that adds Timestamp to service message according to
+            http://confluence.jetbrains.net/display/TCD7/Build+Script+Interaction+with+TeamCity
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityTestsSubWriter">
+            <summary>
+            Sub inteface for created tests writer for some parent test suite.
+            </summary>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityTestWriter">
+            <summary>
+            Writer interface for generating test information service messages
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityTestWriter.WriteStdOutput(System.String)">
+            <summary>
+            Attaches test output to the test
+            </summary>
+            <param name="text">test output</param>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityTestWriter.WriteErrOutput(System.String)">
+            <summary>
+            Attaches test error output to the test
+            </summary>
+            <param name="text">error output</param>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityTestWriter.WriteIgnored(System.String)">
+            <summary>
+            Marks test as ignored
+            </summary>
+            <param name="ignoreReason">test ignore reason</param>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityTestWriter.WriteIgnored">
+            <summary>
+            Marks test as ignored
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityTestWriter.WriteFailed(System.String,System.String)">
+            <summary>
+            Marks test as failed.
+            </summary>
+            <param name="errorMessage">short error message</param>
+            <param name="errorDetails">detailed error information, i.e. stacktrace</param>
+            <remarks>
+            This method can be called only once.
+            </remarks>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityTestWriter.WriteDuration(System.TimeSpan)">
+            <summary>
+            Specifies test duration
+            </summary>
+            <remarks>
+            TeamCity may compute test duration inself, to provide precise data, you may set the duration explicitly
+            </remarks>
+            <param name="duration">time of test</param>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityServiceMessages">
+            <summary>
+            Factory interface for specialized service messages generation
+            Create instance of <see cref="T:JetBrains.TeamCity.ServiceMessages.Write.Special.TeamCityServiceMessages"/> to get the implementation of the interface.
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityServiceMessages.CreateWriter">
+            <summary>
+            Created writer that generates service messages to a Console.Out
+            </summary>
+            <remarks>
+            Implementation does not support multiple-threads. 
+            If you need to log more me
+            </remarks>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityServiceMessages.CreateWriter(System.Action{System.String})">
+            <summary>
+            Creates writer that translates service messages to the given 
+            delegate. 
+            </summary>
+            <param name="destination">generated service messages processor</param>
+            <returns></returns>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.ITeamCityServiceMessages.AddServiceMessageUpdater(JetBrains.TeamCity.ServiceMessages.Write.Special.IServiceMessageUpdater)">
+            <summary>
+            Adds user-specific service message updater to the list of service message updaters.
+            </summary>
+            <param name="updater">updater instance</param>
+        </member>
+        <member name="T:JetBrains.TeamCity.ServiceMessages.Write.Special.TeamCityServiceMessages">
+            <summary>
+            Basic implementation of TeamCity service message generation facade
+            </summary>
+        </member>
+        <member name="M:JetBrains.TeamCity.ServiceMessages.Write.Special.TeamCityServiceMessages.#ctor(JetBrains.TeamCity.ServiceMessages.Write.IServiceMessageFormatter,JetBrains.TeamCity.ServiceMessages.Write.Special.IFlowIdGenerator,System.Collections.Generic.IEnumerable{JetBrains.TeamCity.ServiceMessages.Write.Special.IServiceMessageUpdater})">
+            <summary>
+            Most specific constructor. Could be used with DI
+            </summary>
+        </member>
+    </members>
+</doc>
