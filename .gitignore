@@ -8,3 +8,4 @@
 /runner/ConfigTransformer/obj
 /plugin/configTransformations-server/target
 /runner/.vs
+/plugin/configTransformations-agent/ConfigTransformer
