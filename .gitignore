@@ -1,0 +1,10 @@
+/plugin/.idea/workspace.xml
+/plugin/build/target
+/plugin/configTransformations-agent/target
+/plugin/configTransformations-common/target
+/plugin/target
+/runner/packages
+/runner/ConfigTransformer/bin
+/runner/ConfigTransformer/obj
+/plugin/configTransformations-server/target
+/runner/.vs
