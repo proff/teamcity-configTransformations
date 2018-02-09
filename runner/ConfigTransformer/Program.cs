@@ -10,68 +10,77 @@ namespace ConfigTransformer
 {
     internal class Program
     {
-        private static void Main()
+        private static int Main()
         {
-            Console.OutputEncoding = Encoding.Default;
-
-            var source = Environment.GetEnvironmentVariable("config-transformations-source");
-            var target = Environment.GetEnvironmentVariable("config-transformations-target");
-            var verbose = Environment.GetEnvironmentVariable("config-transformations-verbose") == "true";
-
-            Console.WriteLine("source:");
-            Console.WriteLine(source);
-
-            Console.WriteLine("target:");
-            Console.WriteLine(target);
-
-            Console.WriteLine($"verbose: {verbose}");
-
-            if (string.IsNullOrWhiteSpace(source) || string.IsNullOrWhiteSpace(target))
-            {
-                Console.WriteLine("warning: nothing to transform");
-                return;
-            }
-
-            var sourceIsXml = false;
+            var logger = new TeamCityServiceMessages().CreateWriter();
             try
             {
-                // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
-                XDocument.Parse(source);
-                sourceIsXml = true;
-            }
-            catch (XmlException)
-            {
-            }
+                Console.OutputEncoding = Encoding.Default;
 
-            var transformFiles = new List<string>();
-            if (sourceIsXml)
-                transformFiles.Add(source);
-            else
-                foreach (var s in source.Split(new[] {'\n'}, StringSplitOptions.RemoveEmptyEntries))
-                    transformFiles.Add(s.Trim());
+                var source = Environment.GetEnvironmentVariable("config-transformations-source");
+                var target = Environment.GetEnvironmentVariable("config-transformations-target");
+                var verbose = Environment.GetEnvironmentVariable("config-transformations-verbose") == "true";
 
-            var targetFiles = new List<string>();
-            foreach (var s in target.Split(new[] {'\n'}, StringSplitOptions.RemoveEmptyEntries))
-                targetFiles.Add(s.Trim());
+                Console.WriteLine("source:");
+                Console.WriteLine(source);
 
-            var logger = new TeamCityServiceMessages().CreateWriter();
-            foreach (var transformFile in transformFiles)
-            foreach (var targetFile in targetFiles)
-            {
-                var t = sourceIsXml ? "transform" : transformFile;
-                using (var block = logger.OpenBlock($"apply {t} to {targetFile}"))
+                Console.WriteLine("target:");
+                Console.WriteLine(target);
+
+                Console.WriteLine($"verbose: {verbose}");
+
+                if (string.IsNullOrWhiteSpace(source) || string.IsNullOrWhiteSpace(target))
                 {
-                    var doc = new XmlTransformableDocument();
-                    doc.Load(targetFile);
+                    Console.WriteLine("warning: nothing to transform");
+                    return 0;
+                }
 
-                    using (var l = new Logger(block, verbose))
+                var sourceIsXml = false;
+                try
+                {
+                    // ReSharper disable once ReturnValueOfPureMethodIsNotUsed
+                    XDocument.Parse(source);
+                    sourceIsXml = true;
+                }
+                catch (XmlException)
+                {
+                }
+
+                var transformFiles = new List<string>();
+                if (sourceIsXml)
+                    transformFiles.Add(source);
+                else
+                    foreach (var s in source.Split(new[] {'\n'}, StringSplitOptions.RemoveEmptyEntries))
+                        transformFiles.Add(s.Trim());
+
+                var targetFiles = new List<string>();
+                foreach (var s in target.Split(new[] {'\n'}, StringSplitOptions.RemoveEmptyEntries))
+                    targetFiles.Add(s.Trim());
+
+                foreach (var transformFile in transformFiles)
+                foreach (var targetFile in targetFiles)
+                {
+                    var t = sourceIsXml ? "transform" : transformFile;
+                    using (var block = logger.OpenBlock($"apply {t} to {targetFile}"))
                     {
-                        var xt = new XmlTransformation(transformFile, !sourceIsXml, l);
-                        xt.Apply(doc);
+                        var doc = new XmlTransformableDocument();
+                        doc.Load(targetFile);
+
+                        using (var l = new Logger(block, verbose))
+                        {
+                            var xt = new XmlTransformation(transformFile, !sourceIsXml, l);
+                            xt.Apply(doc);
+                        }
+                        doc.Save(targetFile);
                     }
-                    doc.Save(targetFile);
                 }
             }
+            catch (Exception e)
+            {
+                logger.WriteError(e.ToString());
+                return 42;
+            }
+            return 0;
         }
 
         private class Logger : IXmlTransformationLogger, IDisposable

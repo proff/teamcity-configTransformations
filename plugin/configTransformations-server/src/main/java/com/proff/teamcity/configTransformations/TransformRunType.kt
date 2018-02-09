@@ -43,6 +43,6 @@ class TransformRunType(private val pluginDescriptor: PluginDescriptor,
     }
 
     override fun getRunnerSpecificRequirements(runParameters: MutableMap<String, String>): MutableList<Requirement> {
-        return mutableListOf(Requirement("Exists=>DotNetFramework(4\\.0|4\\.5|4\\.5\\.1|4\\.5\\.2|4\\.6|4\\.6\\.1|4\\.6\\.2).*", null, RequirementType.EXISTS))
+        return mutableListOf(Requirement("Exists=>DotNetFramework(4\\.5|4\\.5\\.1|4\\.5\\.2|4\\.6|4\\.6\\.1|4\\.6\\.2|4\\.7).*", null, RequirementType.EXISTS));
     }
 }
